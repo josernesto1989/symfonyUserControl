@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PiezaAPagar index{% endblock %}
+
+{% block body %}
+    <h1>PiezaAPagar index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pieza_a_pagar in pieza_a_pagars %}
+            <tr>
+                <td>{{ pieza_a_pagar.id }}</td>
+                <td>{{ pieza_a_pagar.nombre }}</td>
+                <td>{{ pieza_a_pagar.precio }}</td>
+                <td>{{ pieza_a_pagar.descripcion }}</td>
+                <td>
+                    <a href="{{ path('pieza_a_pagar_show', {'id': pieza_a_pagar.id}) }}">show</a>
+                    <a href="{{ path('pieza_a_pagar_edit', {'id': pieza_a_pagar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pieza_a_pagar_new') }}">Create new</a>
+{% endblock %}

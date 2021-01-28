@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoPieza index{% endblock %}
+
+{% block body %}
+    <h1>TipoPieza index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tipo</th>
+                <th>ManoDeObra</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipo_pieza in tipo_piezas %}
+            <tr>
+                <td>{{ tipo_pieza.id }}</td>
+                <td>{{ tipo_pieza.tipo }}</td>
+                <td>{{ tipo_pieza.manoDeObra }}</td>
+                <td>
+                    <a href="{{ path('tipo_pieza_show', {'id': tipo_pieza.id}) }}">show</a>
+                    <a href="{{ path('tipo_pieza_edit', {'id': tipo_pieza.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipo_pieza_new') }}">Create new</a>
+{% endblock %}

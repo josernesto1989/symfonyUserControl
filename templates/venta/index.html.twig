@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Venta index{% endblock %}
+
+{% block body %}
+    <h1>Venta index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>Hora</th>
+                <th>Fecha</th>
+                <th>Trabajo</th>
+                <th>Ingreso</th>
+                <th>Costo</th>
+                <th>Internet</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ventum in ventas %}
+            <tr>
+                <td>{{ ventum.id }}</td>
+                <td>{{ ventum.descripcion }}</td>
+                <td>{{ ventum.hora ? ventum.hora|date('H:i:s') : '' }}</td>
+                <td>{{ ventum.fecha ? ventum.fecha|date('Y-m-d') : '' }}</td>
+                <td>{{ ventum.trabajo }}</td>
+                <td>{{ ventum.ingreso }}</td>
+                <td>{{ ventum.costo }}</td>
+                <td>{{ ventum.internet }}</td>
+                <td>
+                    <a href="{{ path('venta_show', {'id': ventum.id}) }}">show</a>
+                    <a href="{{ path('venta_edit', {'id': ventum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('venta_new') }}">Create new</a>
+{% endblock %}

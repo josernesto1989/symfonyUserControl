@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>{{ controller_name }}! </h1>
+
+    Módulos Disponibles:
+    <ul>
+        <li><a href="{{ absolute_url('/ventasmodule') }}">Ventas</a></li>
+        <li><a href="{{ absolute_url('/admin/user') }}">Usuarios</a></li>
+        <li><a href="{{ absolute_url('/admin/ventas/report') }}">Reportes ventas</a></li>
+{#        <li>Your controller at <code><a href="{{ 'F:/XAMPP/htdocs/st/testuser/src/Controller/DashboardController.php'|file_link(0) }}">src/Controller/DashboardController.php</a></code></li>#}
+{#        <li>Your template at <code><a href="{{ 'F:/XAMPP/htdocs/st/testuser/templates/dashboard/index.html.twig'|file_link(0) }}">templates/dashboard/index.html.twig</a></code></li>#}
+    </ul>
+</div>
+{% endblock %}

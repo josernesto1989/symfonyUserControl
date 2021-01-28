@@ -1,0 +1,8 @@
+form>button.btn{
+    color: #fff;
+    background-color: #009300;
+    border-color: #005300;
+}
+input.number{
+    max-width: 40px;
+}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ventas{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {  max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+{#    <h1>{{ controller_name }}!</h1>#}
+{#        {% block weekControlers %}#}
+{#        <div class="container week-btn">#}
+{#            <a href="{{ absolute_url('/ventasmodule/admin/week/new') }}">#}
+{#                <button class="btn btn-primary">Iniciar Semana</button>#}
+{#            </a>#}
+{#            <button class="btn btn-primary">Cerrar Semana</button>#}
+{#            <button class="btn btn-primary">Buscar Semana</button>#}
+{#            <button class="btn btn-primary">Exportar Semana a Excel</button>#}
+{#        </div>#}
+{#        {% endblock %}#}
+{#    <br>#}
+{#        {% block dayControlers %}#}
+{#        <div class="container day-btn">#}
+{#            <a href="{{ absolute_url('/ventasmodule/admin/day/new')  }}">#}
+{#                <button class="btn btn-primary">Iniciar día</button>#}
+{#            </a>#}
+{#            <button class="btn btn-primary">Ver día</button>#}
+{#            <a href="{{ absolute_url('/ventasmodule/admin/closeday')  }}">#}
+{#                <button class="btn btn-primary">Cerrar día</button>#}
+{#            </a>#}
+{#        </div>#}
+{#        {% endblock %}#}
+    <br>
+        {% block interactionarea %}
+        {% endblock %}
+    <p><a href="{{ absolute_url('/ventasmodule')  }}">Volver al Módulo de Ventas</a></p>
+</div>
+{% endblock %}

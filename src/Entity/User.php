@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -23,6 +24,12 @@ class User implements UserInterface
      */
     private $username;
 
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $alias;
+
     /**
      * @ORM\Column(type="json")
      */
@@ -33,6 +40,33 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Venta", mappedBy="user")
+     */
+    private $venta;
+
+    /**
+     * @return mixed
+     */
+    public function getVenta()
+    {
+        return $this->venta;
+    }
+
+    /**
+     * @param mixed $venta
+     */
+    public function setVenta($venta): void
+    {
+        $this->venta = $venta;
+    }
+
+    public function __construct()
+    {
+        $this->venta = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -105,5 +139,21 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * @param mixed $alias
+     */
+    public function setAlias($alias): void
+    {
+        $this->alias = $alias;
     }
 }

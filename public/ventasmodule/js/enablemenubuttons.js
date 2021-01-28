@@ -1,0 +1,7 @@
+function enableButonsWeek() {
+
+}
+
+function enableButonsDays() {
+
+}

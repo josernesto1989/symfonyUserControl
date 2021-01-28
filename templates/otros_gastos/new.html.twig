@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agregar Gasto{% endblock %}
+
+{% block body %}
+    <h1>Adiciononar Gasto</h1>
+    {{ form_start(form) }}
+    <table>
+        <tr>
+            <td>{{ form_label(form.nombre) }}</td>
+            <td>{{ form_widget(form.nombre) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.costo) }}</td>
+            <td>{{ form_widget(form.costo) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.descripcion) }}</td>
+            <td>{{ form_widget(form.descripcion) }}</td>
+        </tr>
+    </table>
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+    <a href="{{ path('ventasmodule') }}">Volver al día</a>
+{% endblock %}

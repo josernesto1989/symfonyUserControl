@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PiezaAPagar{% endblock %}
+
+{% block body %}
+    <h1>Edit PiezaAPagar</h1>
+
+    {{ include('pieza_a_pagar/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ventasmodule') }}">back to list</a>
+
+    {{ include('pieza_a_pagar/_delete_form.html.twig') }}
+{% endblock %}

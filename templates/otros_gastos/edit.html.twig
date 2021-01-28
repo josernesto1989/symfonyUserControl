@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OtrosGastos{% endblock %}
+
+{% block body %}
+    <h1>Edit OtrosGastos</h1>
+
+    {{ include('otros_gastos/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    <a href="{{ path('ventasmodule') }}">Módulo de ventas</a>
+
+    {{ include('otros_gastos/_delete_form.html.twig') }}
+{% endblock %}

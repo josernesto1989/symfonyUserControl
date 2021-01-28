@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar día{% endblock %}
+
+{% block body %}
+    <h1>Editar día</h1>
+
+    {{ include('day/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    <a href="{{ path('ventasmodule') }}">Módulo de ventas</a>
+
+    {{ include('day/_delete_form.html.twig') }}
+{% endblock %}

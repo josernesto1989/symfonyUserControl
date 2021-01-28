@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Day{% endblock %}
+
+{% block body %}
+    <h1>Day</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ day.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ day.fecha ? day.fecha|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Open</th>
+                <td>{{ day.open ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Internet</th>
+                <td>{{ day.internet }}</td>
+            </tr>
+            <tr>
+                <th>Firmware</th>
+                <td>{{ day.firmware }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('ventasmodule') }}">Módulo de ventas</a>
+
+    <a href="{{ path('day_edit', {'id': day.id}) }}">edit</a>
+
+    {{ include('day/_delete_form.html.twig') }}
+{% endblock %}

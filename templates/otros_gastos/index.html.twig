@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OtrosGastos index{% endblock %}
+
+{% block body %}
+    <h1>OtrosGastos index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Costo</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for otros_gasto in otros_gastos %}
+            <tr>
+                <td>{{ otros_gasto.id }}</td>
+                <td>{{ otros_gasto.nombre }}</td>
+                <td>{{ otros_gasto.costo }}</td>
+                <td>{{ otros_gasto.descripcion }}</td>
+                <td>
+                    <a href="{{ path('otros_gastos_show', {'id': otros_gasto.id}) }}">show</a>
+                    <a href="{{ path('otros_gastos_edit', {'id': otros_gasto.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('otros_gastos_new') }}">Create new</a>
+{% endblock %}

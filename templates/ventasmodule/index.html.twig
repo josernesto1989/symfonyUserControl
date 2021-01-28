@@ -1,0 +1,244 @@
+{% extends 'ventasmodule/ventasbase.html.twig' %}
+
+{% block title %}Hello VentasmoduleController!{% endblock %}
+
+{% block interactionarea %}
+    <div>
+        <label>Fecha: {{ currentDay.fecha ? currentDay.fecha|date('d/m/y') : '' }}</label>
+
+        <div>
+            <div>
+                <label for="internetcard">Tarjetas de internet:</label>
+                <input style="width: 50px"  id="internetcard" type="number" value="{{ currentDay.internet>0 ? currentDay.internet : 0 }}">
+            </div>
+
+            <div>
+                <label for="firmware">Firmware:</label>
+                <input style="width: 50px"  id="firmware" type="number" value="{{ currentDay.firmware>0 ? currentDay.firmware : 0 }}">
+            </div>
+            <div>
+                <label for="sobrante">Sobrante</label>
+                <input style="width: 50px" id="sobrante" type="number" value="{{ currentDay.sobrante>0 ? currentDay.sobrante : 0 }}">
+            </div>
+            <button class="btn btn-success" id="updateGastos">actualizar</button>
+        </div>
+
+    </div>
+
+    <br>
+    <a href="{{ absolute_url('/ventasmodule/venta/new') }}">
+        <button class="btn btn-primary">+Nueva Venta</button>
+    </a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Hora</th>
+            <th>Trabajo</th>
+{#            <th>Descripcion</th>#}
+            <th>Ingreso</th>
+            <th>Costo</th>
+            <th>Créditos</th>
+            <th>Usuario</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set ingresoTotal = 0 %}
+        {% set costoTotal = 0 %}
+        {% set creditosTotal = 0%}
+        {% set gananciaTotal = 0%}
+
+        {% set num = 3 %}
+        {% for ventum in currentDay.venta %}
+            <tr>
+                <td>{{ num }}</td>
+                {% set num = num +1 %}
+                <td>{{ ventum.hora ? ventum.hora|date('h:i A') : '' }}</td>
+                {#                <td>{{ ventum.fecha ? ventum.fecha|date('Y-m-d') : '' }}</td>#}
+                <td>{{ ventum.trabajo }}</td>
+{#                <td>{{ ventum.descripcion }}</td>#}
+                <td>{{ ventum.ingreso }}</td>
+                <td>{{ ventum.costo }}</td>
+                <td>{{ ventum.creditos }}</td>
+                <td>{{ ventum.user.username }}</td>
+                <td>
+{#                    <a href="{{ path('venta_show', {'id': ventum.id}) }}">show</a>#}
+                    <a href="{{ path('venta_edit', {'id': ventum.id}) }}">editar</a>
+                </td>
+            </tr>
+            {% set ingresoTotal = ingresoTotal + ventum.ingreso %}
+            {% set costoTotal = costoTotal+ventum.costo %}
+            {% set creditosTotal = creditosTotal+ventum.creditos %}
+{#            {% set gananciaTotal = ingresoTotal-costoTotal-creditosTotal  %}#}
+
+        {% else %}
+            <tr>
+                <td colspan="9">No hay ventas registradas</td>
+            </tr>
+        {% endfor %}
+{#        {{ form_start(formVenta) }}#}
+{#        <button class="btn btn-success">{{ button_label|default('Save') }}</button>#}
+{#        {{ form_widget(formVenta) }}#}
+
+{#            <tr>#}
+{#                <td></td>#}
+{#                <td>#}
+{#                    {{ form_label(formVenta.trabajo) }}#}
+{#                    {{ form_widget(formVenta.trabajo) }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ form_label(formVenta.ingreso) }}#}
+{#                    {{ form_widget(formVenta.ingreso) }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ form_label(formVenta.costo) }}#}
+{#                    {{ form_widget(formVenta.costo) }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ form_label(formVenta.creditos) }}#}
+{#                    {{ form_widget(formVenta.creditos) }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ form_label(formVenta.user) }}#}
+{#                    {{ form_widget(formVenta.user) }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {{ form_label(formVenta.descripcion) }}#}
+{#                    {{ form_widget(formVenta.descripcion) }}#}
+{#                </td>#}
+{#                <td>#}
+{#                    <br>#}
+{#                    <button class="btn btn-success">{{ button_label|default('Save') }}</button>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {{ form_end(formVenta) }}#}
+            <tr class="susses">
+                <td></td>
+                <td>TOTAL</td>
+{#                <td></td>#}
+                <td>{{ ingresoTotal }}</td>
+                <td>{{ costoTotal }}</td>
+                <td>{{ creditosTotal }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ absolute_url('/ventasmodule/venta/new') }}">
+        <button class="btn btn-primary">+Nueva Venta</button>
+    </a>
+    <br>
+    <br>
+    <br>
+    <a href="{{ absolute_url('/ventasmodule/otros/gastos/new') }}">
+        <button class="btn btn-primary">+Nuevo Gasto</button>
+    </a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Descripción</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for gasto in currentDay.gastos %}
+            <tr>
+                <td>{{ gasto.nombre }}</td>
+                <td>{{ gasto.costo }}</td>
+                <td>{{ gasto.descripcion }}</td>
+                <td>
+                    <a href="{{ path('venta_show', {'id': gasto.id}) }}">show</a>
+                    <a href="{{ path('venta_edit', {'id': gasto.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">No hay gastos registradas</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ absolute_url('/ventasmodule/otros/gastos/new') }}">
+        <button class="btn btn-primary">+Nuevo Gasto</button>
+    </a>
+    <br>
+    <br>
+    <br>
+
+    <a href="{{ absolute_url('/ventasmodule/admin/piezaapagar/new') }}">
+        <button class="btn btn-primary">+Nueva Pieza a Pagar</button>
+    </a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Descripción</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pieza in currentDay.piezaAPagar %}
+            <tr>
+                <td>{{ pieza.nombre }}</td>
+                <td>{{ pieza.precio }}</td>
+                <td>{{ pieza.descripcion }}</td>
+                <td>
+                    <a href="{{ path('venta_show', {'id': pieza.id}) }}">show</a>
+                    <a href="{{ path('venta_edit', {'id': pieza.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">No hay piezas a pagar registradas</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ absolute_url('/ventasmodule/admin/piezaapagar/new') }}">
+        <button class="btn btn-primary">+Nueva Pieza a Pagar</button>
+    </a>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    <script>
+        function actualizarSobrante(id) {
+            var ruta = Routing.generate('day_others');
+            var tarjetasInternet = $('#internetcard').val();
+            var firmware = $('#firmware').val();
+            var sobrante = $('#sobrante').val();
+            // var tarjetasInternet = $('#internetcard').val();
+            $.ajax({
+                type: 'POST',
+                url: ruta,
+                data: ({
+                    id: id,
+                    firmware:firmware,
+                    sobrante:sobrante,
+                    tarjetasInternet: tarjetasInternet
+                }),
+                async:true,
+                dataType: "json",
+                success: function (data) {
+                   
+                }
+            })
+
+        }
+
+        $('#updateGastos').click(function (){
+            // alert('hola');
+            actualizarSobrante({{ currentDay.id }})
+            {#var internet = $('#internetcard').val();#}
+            {#var fw = $('#firmware').val();#}
+            {#var sob = $('#sobrante').val();#}
+
+            {#window.location.href = '{{ absolute_url('/ventasmodule/update/') }}'+internet+'/'+fw+'/'+sob;#}
+        });
+    </script>
+{% endblock %}

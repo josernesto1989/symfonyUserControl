@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Venta{% endblock %}
+
+{% block body %}
+    <h1>Crear nueva Venta</h1>
+    {{ form_start(form) }}
+    <table>
+        <tr>
+            <td>{{ form_label(form.descripcion) }}</td>
+            <td>{{ form_widget(form.descripcion) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.trabajo) }}</td>
+            <td>{{ form_widget(form.trabajo) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.ingreso) }}</td>
+            <td>{{ form_widget(form.ingreso) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.costo) }}</td>
+            <td>{{ form_widget(form.costo) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.creditos) }}</td>
+            <td>{{ form_widget(form.creditos) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.user) }}</td>
+            <td>{{ form_widget(form.user) }}</td>
+        </tr>
+    </table>
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('ventasmodule') }}">back to list</a>
+{% endblock %}

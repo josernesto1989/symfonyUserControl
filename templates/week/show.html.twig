@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Week{% endblock %}
+
+{% block body %}
+    <h1>Week</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ week.id }}</td>
+            </tr>
+            <tr>
+                <th>StartDate</th>
+                <td>{{ week.startDate ? week.startDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Open</th>
+                <td>{{ week.open ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('week_index') }}">back to list</a>
+
+    <a href="{{ path('week_edit', {'id': week.id}) }}">edit</a>
+
+    {{ include('week/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Reporte de Ventas{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Reporte Ventas {{ controller_name }}! ✅</h1>
+        <div class="row">
+            <label for="initial-date">Fecha inicial:</label>
+            <input type="date" id="initial-date">
+        </div>
+        
+        <div class="row">
+            <label for="final-date">Fecha final:</label>
+            <input type="date" id="final-date">
+        </div>
+        <button class='btn btn-primary' onclick="obtenerReporte()">
+            Enviar
+        </button>
+    </form>    
+</div>
+<div id='report-area'>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script>
+    $(document).ready(function(){
+        let today =new Date();
+        let currentDate = 
+        String(today.getMonth()+1).padStart(2,'0')+'/'+
+        String(today.getDate()+1).padStart(2,'0')+'/'+
+        (today.getFullYear());       
+      
+    })
+
+
+    $("#initial-date").change(function(){
+        var defaultValue = $("#initial-date").val();
+        var toChangeId = "final-date";
+        adjustDate(toChangeId,defaultValue);
+      });
+
+    $("#final-date").change(function(){
+    var defaultValue = $("#final-date").val();
+    var toChangeId = "initial-date";
+    adjustDate(toChangeId,defaultValue);
+    });
+
+    function adjustDate(toChangeId,defaultValue){
+        let iniDate =$("#initial-date").val();
+        let endDate =$("#final-date").val();
+        if(new Date(iniDate).getTime() >new Date(endDate).getTime()){
+            $("#"+toChangeId).val(defaultValue);
+        }
+    }
+
+
+    function obtenerReporte() {
+        var ruta = Routing.generate('getventasreport');
+        var iniDate =$("#initial-date").val();
+        var endDate =$("#final-date").val();
+        // var tarjetasInternet = $('#internetcard').val();
+        $.ajax({
+            type: 'POST',
+            url: ruta,
+            data: ({
+                iniDate:iniDate,
+                endDate:endDate
+            }),
+            async:true,
+            dataType: "json",
+            success: function (data) {
+               
+            }
+        }).done(function(data){
+            console.log(data['ventas']);   
+            var values = data['ventas']
+            $("#report-area").empty();
+        var table = '<table class="table"><tr> <th>id</th> <th>trabajo</th> <th>ingreso</th> <th>costo</th> <th>creditos</th> <th>user</th></tr>'
+        for(var i= 0; i<values.length ; i++){
+            var nuevo = '<tr>';
+            console.log(values[i]);
+            var venta= JSON.parse(values[i]);
+            
+            nuevo+='<td>'+venta['id'];//id:1,descripcion:,trabajo:PC E1,ingreso:10,costo:2,creditos:0,user:admin}
+            nuevo+='</td><td>'+venta['trabajo'];
+            nuevo+='</td><td>'+venta['ingreso'];
+            nuevo+='</td><td>'+venta['costo'];
+            nuevo+='</td><td>'+venta['creditos'];
+            nuevo+='</td><td>'+venta['usuario']+'</td>';
+
+
+            nuevo+='</tr>'
+            table+=(nuevo);
+        }
+        table+="</table>";
+        $("#report-area").append(table);
+             
+            
+        });
+
+    }
+    function createTable(){
+        //$("#report-area").empty();
+        /*var table = '<table><tr><th>id</th><th><trabajo/th><th>ingreso</th><th>costo</th><th><creditos/th><th>user</th><th></th>'
+        for(var i= 0; i<values.length ; i++){
+            var nuevo = '<tr>';
+            nuevo+='<td>'+values[i]['id'];//id:1,descripcion:,trabajo:PC E1,ingreso:10,costo:2,creditos:0,user:admin}
+            nuevo+='</td></tr>'
+            table+=(nuevo);
+        }
+        table+="</table>";
+        $("#report-area").append(table);*/
+
+    }
+</script>
+    
+{% endblock %}

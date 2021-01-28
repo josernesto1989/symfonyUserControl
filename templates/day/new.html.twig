@@ -1,0 +1,12 @@
+{% extends 'ventasmodule/ventasbase.html.twig' %}
+
+{% block title %}New Day{% endblock %}
+
+{% block interactionarea %}
+    <h1>Abrir nuevo día</h1>
+
+    {{ include('day/_form.html.twig') }}
+
+
+    <a href="{{ path('ventasmodule') }}">Módulo de ventas</a>
+{% endblock %}

@@ -67,7 +67,9 @@ class VentaController extends AbstractController
                 return $this->redirectToRoute('ventasmodule');
             }
 
+            $numVenta= count($currentDay->getVenta())+3;
             return $this->render('venta/new.html.twig', [
+                'num'=>$numVenta,
                 'ventum' => $ventum,
                 'form' => $form->createView(),
             ]);

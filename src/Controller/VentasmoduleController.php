@@ -207,6 +207,9 @@ class VentasmoduleController extends AbstractController
                 $row++;
             }
 
+            $sheet->setCellValue('C'.$row,"TARJETA INTERNET");
+            $sheet->setCellValue('H'.$row,0);
+
     }
 
         $writer = new Xlsx($excel);

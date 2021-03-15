@@ -35,7 +35,7 @@ class VentaController extends AbstractController
         $ventum = new Venta();
         $date = new \DateTime();
         $isOpenADay = $dayRepository->isOpenADay();
-        $date = $date->sub(new \DateInterval("PT6H"));
+        $date = $date->sub(new \DateInterval("PT5H"));
         if($isOpenADay) {
             $currentDay = $dayRepository->getOpenDay()[0];
             $ventum->setDay($currentDay);

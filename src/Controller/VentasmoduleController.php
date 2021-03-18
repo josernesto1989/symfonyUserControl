@@ -198,7 +198,7 @@ class VentasmoduleController extends AbstractController
             $row = 3;
             foreach ($venta as $i){
                 //            $sheet->setCellValue('C3','Hola Mundo');
-                $sheet->setCellValue('A'.$row,$i->getHora()->format('h:m'));
+                $sheet->setCellValue('A'.$row,$i->getHora()->format('hh:mm'));
                 $sheet->setCellValue('C'.$row,$i->getTrabajo());
                 $sheet->setCellValue('E'.$row,$i->getIngreso());
                 $sheet->setCellValue('F'.$row,$i->getCosto());

@@ -15,7 +15,7 @@
                 <th>Trabajo</th>
                 <th>Ingreso</th>
                 <th>Costo</th>
-                <th>Internet</th>
+                {# <th>Internet</th> #}
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,7 +29,7 @@
                 <td>{{ ventum.trabajo }}</td>
                 <td>{{ ventum.ingreso }}</td>
                 <td>{{ ventum.costo }}</td>
-                <td>{{ ventum.internet }}</td>
+                {# <td>{{ ventum.internet }}</td> #}
                 <td>
                     <a href="{{ path('venta_show', {'id': ventum.id}) }}">show</a>
                     <a href="{{ path('venta_edit', {'id': ventum.id}) }}">edit</a>

@@ -28,7 +28,7 @@ class VentaType extends AbstractType
                     'choice_label' => 'username',
                     'attr' => [
                         'data-live-search'=>'true',
-                        'class' => 'selectpicker'
+                        'class' => 'selectpicker ne-hide'
                         ]
                     ])
         ;

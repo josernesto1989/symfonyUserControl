@@ -33,7 +33,18 @@
         </tr>
     </table>
     <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+
+
     {{ form_end(form) }}
 
+    <button class="btn primary" id="invalid-time">Sin hora</button>    
     <a href="{{ path('ventasmodule') }}">back to list</a>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $("#invalid-time").click(function (){
+            $("#venta_hora_hour").val("0");
+            $("#venta_hora_minute").val("0");
+        });
+    </script>
 {% endblock %}

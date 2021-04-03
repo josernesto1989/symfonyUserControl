@@ -37,6 +37,7 @@ class VentasmoduleController extends AbstractController
             return $this->render('ventasmodule/errorpage.html.twig', [
                 'controller_name' => 'Debe iniciar un nuevo día',
                 'error' => 'Inicie un nuevo día para continuar',
+                // 'link' =>Poner enlace
             ]);
         }
 
@@ -199,7 +200,7 @@ class VentasmoduleController extends AbstractController
             foreach ($venta as $i){
                 //            $sheet->setCellValue('C3','Hola Mundo');
                 $sheet->setCellValue('A'.$row,$i->getHora()->format('h:i'));
-                $sheet->setCellValue('C'.$row,$i->getTrabajo());
+                $sheet->setCellValue('C'.$row,strtoupper($i->getTrabajo()));
                 $sheet->setCellValue('E'.$row,$i->getIngreso());
                 $sheet->setCellValue('F'.$row,$i->getCosto());
                 $sheet->setCellValue('G'.$row,$i->getCreditos());

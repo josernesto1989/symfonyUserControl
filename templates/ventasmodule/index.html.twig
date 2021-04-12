@@ -3,6 +3,9 @@
 {% block title %}Ventasmodule{% endblock %}
 
 {% block interactionarea %}
+    <div class = "quick-actions-menu" style="float:right">
+        <a href="{{ path('week_excel') }}"><img src="{{ asset('img/icons48export_to_excel.png') }}"/></a>
+     </div>
     <div>
         <label>Fecha: {{ currentDay.fecha ? currentDay.fecha|date('d/m/y') : '' }}</label>
 

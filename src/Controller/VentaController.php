@@ -68,11 +68,17 @@ class VentaController extends AbstractController
             }
 
             $numVenta= count($currentDay->getVenta())+3;
-            return $this->render('venta/new.html.twig', [
+             
+            $response = $this->render('venta/new.html.twig', [
                 'num'=>$numVenta,
                 'ventum' => $ventum,
                 'form' => $form->createView(),
             ]);
+
+            // sets the shared max age - which also marks the response as public
+            $response->setSharedMaxAge(3600);
+
+            return $response;
         }
         else{
             return $this->render('ventasmodule/errorpage.html.twig',[

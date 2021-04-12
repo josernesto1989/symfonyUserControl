@@ -208,7 +208,7 @@ class VentasmoduleController extends AbstractController
                 $row++;
             }
 
-            $sheet->setCellValue('C'.$row,"TARJETA INTERNET");
+            $sheet->setCellValue('C'.$row,$day->getInternet()." x TARJETA INTERNET");
             $sheet->setCellValue('H'.$row,0);
 
     }
